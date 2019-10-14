@@ -68,6 +68,8 @@ class CatkinBuildTask(TaskExtensionPoint):
         if args.cmake_target is None:
             if not args.catkin_skip_building_tests:
                 additional_targets.append('tests')
+                # install is required for some cmake generator
+                additional_targets.append('install')
                 args.cmake_target_skip_unavailable = True
         rc = await extension.build(
             skip_hook_creation=True, additional_targets=additional_targets)
